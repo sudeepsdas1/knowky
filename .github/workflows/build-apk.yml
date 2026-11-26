@@ -1,0 +1,61 @@
+name: Build Knowky APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Copy the app into the Android project
+        run: npx cap sync android
+
+      - name: Build the APK
+        working-directory: android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Rename the APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Knowky.apk
+
+      - name: Upload APK (Actions tab download)
+        uses: actions/upload-artifact@v7
+        with:
+          name: Knowky-APK
+          path: Knowky.apk
+
+      - name: Publish APK on the Releases page
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Knowky build ${{ github.run_number }}
+          body: |
+            Download **Knowky.apk** below and open it on your Android phone to install.
+          files: Knowky.apk
+          make_latest: true
