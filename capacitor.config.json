@@ -1,0 +1,15 @@
+{
+  "appId": "com.knowky.app",
+  "appName": "Knowky",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#FFF8EC"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "initialViewportFitValueHint": "cover",
+      "style": "LIGHT"
+    }
+  }
+}

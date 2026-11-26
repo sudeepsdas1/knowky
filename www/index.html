@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFF8EC" />
+  <title>Knowky</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">K</span>
+        <span class="brand-name">Knowky</span>
+      </div>
+      <div class="pills">
+        <span class="pill pill-points" title="Discovery points">⭐ <b id="hdr-points">0</b></span>
+        <span class="pill pill-rating" title="Trivia rating">🏆 <b id="hdr-rating">1000</b></span>
+      </div>
+    </header>
+
+    <!-- Screens -->
+    <main class="screens">
+      <!-- FACTS -->
+      <section id="screen-facts" class="screen active" aria-label="Knowky Facts">
+        <div class="chip-row" id="fact-filters"></div>
+        <div class="feed" id="feed"></div>
+      </section>
+
+      <!-- TRIVIA HUB -->
+      <section id="screen-trivia" class="screen scroll" aria-label="Trivia">
+        <div class="pad">
+          <div class="rating-card">
+            <div>
+              <div class="eyebrow">Your Trivia Rating</div>
+              <div class="rating-big" id="trivia-rating">1000</div>
+              <div class="wl" id="trivia-wl">0 wins · 0 losses · 0 draws</div>
+            </div>
+            <div class="rating-trophy">🏆</div>
+          </div>
+
+          <div class="mode-grid">
+            <button class="mode-card mode-random" id="btn-random">
+              <span class="mode-emoji">🎲</span>
+              <span class="mode-title">Random Trivia</span>
+              <span class="mode-sub">Mixed questions vs a player</span>
+            </button>
+            <button class="mode-card mode-solo" id="btn-solo">
+              <span class="mode-emoji">🧘</span>
+              <span class="mode-title">Solo Mode</span>
+              <span class="mode-sub">Practise on your own</span>
+            </button>
+          </div>
+
+          <div class="section-head">
+            <h2>🌐 Global Topics</h2>
+            <span class="muted small">Post a topic, or join one</span>
+          </div>
+
+          <form class="post-box" id="post-form" autocomplete="off">
+            <input id="post-input" maxlength="30" placeholder="Type a topic, e.g. Planets" />
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
+          <div class="post-hint" id="post-hint"></div>
+
+          <div id="my-challenges"></div>
+          <div id="global-list" class="challenge-list"></div>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="screen-profile" class="screen scroll" aria-label="Profile">
+        <div class="pad">
+          <div class="profile-hero">
+            <button class="avatar-xl" id="profile-avatar" aria-label="Change avatar">🦊</button>
+            <div class="profile-name-wrap">
+              <input id="profile-name" class="profile-name" maxlength="16" value="Explorer" aria-label="Your name" />
+              <div class="muted small">Tap your name or avatar to change them</div>
+            </div>
+          </div>
+          <div class="avatar-picker hidden" id="avatar-picker"></div>
+
+          <div class="stat-grid">
+            <div class="stat stat-a"><div class="stat-val" id="st-points">0</div><div class="stat-lbl">⭐ Discovery points</div></div>
+            <div class="stat stat-b"><div class="stat-val" id="st-facts">0</div><div class="stat-lbl">📚 Facts explored</div></div>
+            <div class="stat stat-c"><div class="stat-val" id="st-rating">1000</div><div class="stat-lbl">🏆 Trivia rating</div></div>
+            <div class="stat stat-d"><div class="stat-val" id="st-record">0-0-0</div><div class="stat-lbl">⚔️ Won-Lost-Drawn</div></div>
+            <div class="stat stat-e"><div class="stat-val" id="st-solo">–</div><div class="stat-lbl">🧘 Best solo score</div></div>
+            <div class="stat stat-f"><div class="stat-val" id="st-played">0</div><div class="stat-lbl">🎮 Quizzes played</div></div>
+          </div>
+
+          <div class="section-head"><h2>🕒 Recent games</h2></div>
+          <div id="history" class="history"></div>
+
+          <p class="note">Knowky doesn't store anything. Your points and scores start fresh every time you open the app.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom navigation -->
+    <nav class="tabbar">
+      <button class="tab active" data-tab="facts"><span class="tab-ic">💡</span><span>Facts</span></button>
+      <button class="tab" data-tab="trivia"><span class="tab-ic">🧠</span><span>Trivia</span></button>
+      <button class="tab" data-tab="profile"><span class="tab-ic">🙂</span><span>Profile</span></button>
+    </nav>
+
+    <!-- Explanation bottom sheet -->
+    <div class="sheet-backdrop hidden" id="sheet-backdrop"></div>
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+      <div class="sheet-grip"></div>
+      <div id="sheet-body"></div>
+    </div>
+
+    <!-- Full-screen overlay (matchmaking, quiz, results, solo setup) -->
+    <div class="overlay hidden" id="overlay"></div>
+
+    <!-- Modal -->
+    <div class="modal-wrap hidden" id="modal"></div>
+
+    <!-- Toasts -->
+    <div class="toasts" id="toasts"></div>
+  </div>
+
+  <script src="js/vendor/capacitor.js"></script>
+  <script src="js/vendor/capacitor-app.js"></script>
+  <script src="js/data-facts.js"></script>
+  <script src="js/data-questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

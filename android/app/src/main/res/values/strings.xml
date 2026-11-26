@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Knowky</string>
+    <string name="title_activity_main">Knowky</string>
+    <string name="package_name">com.knowky.app</string>
+    <string name="custom_url_scheme">com.knowky.app</string>
+</resources>

@@ -1,0 +1,4 @@
+# Keep Linux line endings for the Gradle script so GitHub's build machine can run it
+gradlew text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
